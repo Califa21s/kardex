@@ -1,0 +1,41 @@
+<%= form_for(@est_monte_sur) do |f| %>
+  <% if @est_monte_sur.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@est_monte_sur.errors.count, "error") %> prohibited this est_monte_sur from being saved:</h2>
+
+      <ul>
+      <% @est_monte_sur.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table border=1>
+<tr><td>
+<label for="idequipement">Equipement:</label></td>
+<td>
+<%=  f.select "idequipement", Equipement.includes(:type_equipement).all(:order =>"type_equipements.nom_constructeur,type_equipements.type_equipement,num_serie DESC").collect {|p| [p.type_equipement.nom_constructeur+" "+p.type_equipement.type_equipement+" " + p.num_serie, p.id ] },{:include_blank=> 'None'}%><br/>
+</td></tr>
+<tr><td>
+<label for="idmachine">Machine :</label></td>
+<td>
+<%=  f.select( "idmachine", Machine.includes(:type_machine).all(:order => "type_machines.type_machine,Immatriculation DESC").collect {|p| [ p.type_machine.type_machine+" "+p.Immatriculation,p.id ] },{:include_blank=> 'None'})%><br/>
+</td></tr>
+<tr><td>
+<label for="date_montage">Mont&eacute le  :</label></td>
+<td><%= f.date_select  "date_montage", :order => [:day,:month,:year],:start_year => 1950, :use_month_names=>@tableau_mois %>
+</td></tr>
+<tr><td>
+<label for="date_retrait">retrait le  :</label></td>
+<td><%= f.date_select "date_retrait", :order => [:day,:month,:year],:start_year => 1950, :use_month_names=>@tableau_mois,:include_blank=>' ' %>
+</td></tr>
+</table>
+<h2> Mise &agrave; jour des potentiels</h2>
+<div id="val_pot">
+ <%= render "form_pot" %>
+</div>
+  <div class="actions">
+    <%= f.submit("Enregistrer") %>
+  </div>
+<% end %>

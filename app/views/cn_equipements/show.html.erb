@@ -1,0 +1,55 @@
+﻿<h1>D&eacute;tail CN Equipement</h1>
+<table border=1>
+  <tr>
+	<td>Type equipement</td>
+	<td>Nom</td>
+	<td>Reference</td>
+	<td>BS</td>
+	<td>Valide</td>
+	<td>potentiel</td>
+	<td>
+	Commentaires
+	</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+  </tr>
+
+  <tr>
+	<td><%= @cn_equipement.type_equipement.nom_constructeur + @cn_equipement.type_equipement.type_equipement %></td>
+	<td><%= @cn_equipement.nom %></td>
+	<td><%= @cn_equipement.reference %></td>
+	<td><%= @cn_equipement.service_bulletin %></td>
+	<td align="center"><%= if (!@cn_equipement.est_annule) then image_tag "case_a_cocher.gif" else "&nbsp;" end %></td>
+	<td><%= @cn_equipement.val_potentiel  %> <%= @cn_equipement.type_potentiel.unitee_saisie %></td>
+	
+	<td align="center"><%=@cn_equipement.commentaire %></td>
+	
+    <td><%= link_to 'Modifier', edit_cn_equipement_path(@cn_equipement) %></td>
+    <td><%= link_to 'Supp', @cn_equipement, :confirm => 'etes vous sur?', :method => :delete %></td>
+    
+  </tr>
+</table>
+
+<p></p>
+
+<div style="border-style: none;width:40%;">
+<h2>documents</h2>
+<h3>CN</h3>
+<table border=0>
+	<% @cn_docs.each do |cn_doc| %>
+	<tr>
+		<td><%= link_to(cn_doc.Nom,url_for(:controller=>'cn_equipements', :action=>'envoi_doc',:fichier=>cn_doc.adresse,:id=>0))%></td>
+	</tr>
+	<% end %>
+</table>
+
+<h3>BS</h3>
+<table border=0>
+	<% @bs_docs.each do |bs_doc| %>
+	<tr>
+		<td><%= link_to(bs_doc.Nom,url_for(:controller=>'cn_equipements', :action=>'envoi_doc',:fichier=>bs_doc.adresse,:id=>0))%></td>
+	</tr>
+	<% end %>
+</table>
+</div>
+<%= if !(params[:id_machine].nil?) then link_to 'retour detail machine',url_for(:controller => 'machines',:action=>"show", :id => params[:id_machine],:onglet =>3) else  link_to 'retour à la liste', cn_equipements_path end%>

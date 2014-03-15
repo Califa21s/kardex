@@ -1,0 +1,23 @@
+﻿<h1>Liste des  types de machines</h1>
+<table border=1 >
+  <tr>
+    <td>  Nom du Constructeur </td>
+    <td>  Type de Machine </td>
+    <td>&nbsp</td>
+    <td>&nbsp</td>
+    <td>&nbsp</td>
+  </tr>
+<% @type_machines.each do |type_machine| %>
+  <tr>
+    <td><%= type_machine.Nom_constructeur %></td>
+    <td><%= type_machine.type_machine %></td>
+    <td><%= link_to 'détail', type_machine %></td>
+    <td><%= link_to 'modifier', edit_type_machine_path(type_machine) %></td>
+    <td><%= link_to 'suprimer', type_machine, :confirm => 'êtes vous sur?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Créer un nouveau type de machine', new_type_machine_path %>

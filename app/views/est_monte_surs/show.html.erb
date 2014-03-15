@@ -1,0 +1,58 @@
+﻿<H1> Détail montage équipement <%=@montage_equipement.equipement.type_equipement.nom_constructeur%>  <%=@montage_equipement.equipement.type_equipement.type_equipement%></h1>
+<table border=1>
+	 <tr>
+		<td width=15%>Type</td>
+		<td width=15%>Immat</td>
+		<td> Constructeur</td>
+		<td width=17%>type &eacute;quipement</td>
+		<td width=23%>num s&eacute;rie</td>
+		<td width=12%>date montage</td>
+		<td width=12%>date retrait</td>
+	  </tr>
+<tr>
+	 <td><%= @montage_equipement.machine.type_machine.type_machine %></td>
+	 <td><%= @montage_equipement.machine.Immatriculation%> </td>
+	 <td><%= @montage_equipement.equipement.type_equipement.nom_constructeur    %></td>
+	 <td><%= @montage_equipement.equipement.type_equipement.type_equipement    %></td>
+	 <td><%= @montage_equipement.equipement.num_serie    %></td>
+	 <td><%= if (@montage_equipement.date_montage.nil?) then "&nbsp;" else  @montage_equipement.date_montage.strftime('%d/%m/%Y')  end   %></td>
+	<td><%= if (@montage_equipement.date_retrait.nil?) then " " else @montage_equipement.date_retrait.strftime('%d/%m/%Y') end   %></td>
+</tr>
+</table>
+<h3> potentiel au montage </h3>
+<table border=1>
+<tr>
+	<td>Type potentiel</td>
+	<td>potentiel restant au montage</td>
+	<td>Valeur carnet au montage</td>
+</tr>	
+
+<% @montage_equipement.potentiel_montage.each do |pot| %>
+	<tr>
+		<td><%= pot.potentiel_equipement.type_potentiel.type_potentiel %></td>
+		<td><%=pot.valeur_potentiel_montage%></td>
+		<td><%= if (pot.potentiel_equipement.type_potentiel.type_potentiel=="Calendaire") then @montage_equipement.date_montage.strftime('%d/%m/%Y') else pot.valeur_machine_jour_montage end%></td>
+	</tr>
+<% end %>
+</table>
+<h3> visite entretien réalisé au montage </h3>
+<table border=1>
+<tr>
+	<td>Type de visites</td>
+	<td>type de potentiel</td>
+	<td>Périodicité visite</td>
+	<td>Valeur carnet au montage</td>
+	<td>&nbsp;</td>
+</tr>	
+<% @vis_equip.each do |vis| %>
+	<tr>
+	<td><%= vis.visite_protocolaire_equipement.Nom%></td>
+	<td><%= vis.visite_protocolaire_equipement.type_potentiel.type_potentiel%></td>
+	<td><%= vis.visite_protocolaire_equipement.valeur_potentiel%></td>
+	<td><%= vis.val_potentiel %></td>
+	<td><%= link_to 'modifier', edit_visite_equipement_path(vis) %></td>
+</tr>	
+<%end%>
+</table>
+<%= link_to 'Modifier', edit_est_monte_sur_path(@montage_equipement) %> |
+<%= link_to 'retour à la liste', est_monte_surs_path %>

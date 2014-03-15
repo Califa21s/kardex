@@ -1,0 +1,17 @@
+<%= form_for(@doc_diver) do |f| %>
+  <% if @doc_diver.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@doc_diver.errors.count, "error") %> prohibited this doc_diver from being saved:</h2>
+
+      <ul>
+      <% @doc_diver.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

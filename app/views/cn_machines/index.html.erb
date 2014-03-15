@@ -1,0 +1,36 @@
+﻿<h1>liste des CN machines</h1>
+<% type_machine="" %>
+<p><%= link_to 'nouvelle CN machine', new_cn_machine_path %></p>
+<% @cn_machines.each do |cn_machine| %>
+	<% if cn_machine.type_machine.type_machine != type_machine then%>
+		<%if (type_machine != "") then %></table> <% else %><% end %>
+		<% type_machine = cn_machine.type_machine.type_machine%>
+		<h3><%= cn_machine.type_machine.Nom_constructeur + ' '+cn_machine.type_machine.type_machine %></h3>
+		<table border=1 width= 80%>
+		  <tr>
+			<td width=30%>Nom</td>
+			<td width=20%>Reference</td>
+			<td width=10%>BS</td>
+			<td width=5%>Valide</td>
+			<td width=14%>potentiel</td>
+			<td width=7%>&nbsp</td>
+			<td width=7%>&nbsp</td>
+			<td width=7%>&nbsp</td>
+		  </tr>
+		  
+	<% end%>
+	<% type_machine = cn_machine.type_machine.type_machine%>
+	<% if (cn_machine.est_annule) then @style='id="annule"' else @style='' end%>
+	  <tr>
+		<td <%=@style%>><%= cn_machine.nom %></td>
+		<td <%=@style%>><%= cn_machine.reference %></td>
+		<td><%= cn_machine.service_bulletin %></td>
+		<td align="center"><%= if (!cn_machine.est_annule) then image_tag "case_a_cocher.gif" else image_tag "case_cocher_vide.jpg" end %></td>
+		<td><%= if (cn_machine.type_potentiel.unitee_saisie!="sans") then cn_machine.val_potentiel end %> <%= if (cn_machine.type_potentiel.unitee_saisie!="sans") then cn_machine.type_potentiel.unitee_saisie end %></td>
+	    <td><%= link_to 'détail', cn_machine %></td>
+	    <td><%= link_to 'Modifier', edit_cn_machine_path(cn_machine) %></td>
+	    <td><%= link_to 'Supp', cn_machine, data:{ confirm: 'êtes vous sur?'}, :method => :delete %></td>
+	  </tr>
+<% end %>
+</table>
+<%= link_to 'nouvelle CN machine', new_cn_machine_path %>

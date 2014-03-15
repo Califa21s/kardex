@@ -1,0 +1,27 @@
+<h1>Liste Utilisateur</h1>
+
+<table border=1>
+  <tr>
+	<td>Identité</td>
+	<td>Login</td>
+	<td>Fonction</td>
+	<td>&nbsp</td>
+	<td>&nbsp</td>
+	<td>&nbsp</td>
+  </tr>
+
+<% @personnes.each do |personne| %>
+  <tr>
+    <td><%= personne.Nom + " " + personne.prenom %></td>
+    <td><%= personne.login %></td>
+    <td><%= personne.fonction.nom_fonction %>
+    <td><%= link_to 'détail', personne %></td>
+    <td><%= link_to 'modifier', edit_personne_path(personne) %></td>
+    <td><%= link_to 'Suppr', personne, :confirm => 'êtes vous sur?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Créer un nouvel utilisateur', new_personne_path %>

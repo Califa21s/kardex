@@ -1,0 +1,32 @@
+﻿<h1>liste des équivalences de visites d'équipement</h1>
+
+<%= link_to 'créer nouvelle équivalence', new_equipement_vaut_pour_path %><p/>
+<table border=1>
+  <thead>
+    <tr>
+      <th> type d'équipement</th>
+      <th>visite</th>
+      <th>visite induite</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @equipement_vaut_pours.each do |vaut_pour| %>
+      <tr>
+        <td><%= vaut_pour.maitre.type_equipement.type_equipement%></td>
+	<td><%= vaut_pour.maitre.Nom%></td>
+	<td><%= vaut_pour.induite.Nom%></td>
+        <td><%= link_to 'Détails', vaut_pour %></td>
+        <td><%= link_to 'modifier', edit_equipement_vaut_pour_path(vaut_pour) %></td>
+        <td><%= link_to 'Supp', vaut_pour, method: :delete, data: { confirm: 'êtes vous sur?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

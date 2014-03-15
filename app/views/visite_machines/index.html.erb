@@ -1,0 +1,48 @@
+﻿<h1>Liste des visites machine</h1>
+<% machine=""%>
+<% vis_pro="" %>
+<%= link_to 'créer une visite machine', new_visite_machine_path %>
+<% @visite_machines.each do |visite_machine| %>
+<%if (machine!=visite_machine.machine.Immatriculation) then %>
+<% machine=visite_machine.machine.Immatriculation %>
+<% if(vis_pro!="") then %> </table> <%end%>
+<% vis_pro=""%>
+<h3><%= machine %></h3>
+<%end %>
+<% if (vis_pro!=visite_machine.visite_protocolaire.Nom) then %>
+<% if(vis_pro!="") then %> </table> <%end%>
+<% vis_pro=visite_machine.visite_protocolaire.Nom %>
+<h4><%=vis_pro %></h4>
+<table border=1 width=80%>
+  <tr>
+  
+    <td width=15%>date_visite </td>
+    <td width=15%>ref</td>
+    <td width=15%>type de visite</td>
+    <td width=15%>faite &agrave; </td>
+    <td width=15%>potentiel suite &agrave; visite</td>
+    <td>&nbsp</td>
+    <td>&nbsp</td>
+    <td>&nbsp</td>
+  </tr>
+
+<%end%>
+  <tr>
+    <td><%= visite_machine.date_visite.strftime('%d/%m/%Y') %></td>
+    <td><%= visite_machine.nom %></td>
+    <td><%= visite_machine.visite_protocolaire.Nom %></td>
+    <td><%= visite_machine.val_potentiel%> <%= visite_machine.visite_protocolaire.type_potentiel.unitee %></td>
+    <% if ( visite_machine.visite_protocolaire.potentiel_variable) %>
+	<td><%= visite_machine.val_nouv_pot%> <%= visite_machine.visite_protocolaire.type_potentiel.unitee %></td>
+    <%else %>
+	<td><%= visite_machine.visite_protocolaire.valeur_potentiel%> <%= visite_machine.visite_protocolaire.type_potentiel.unitee %></td>
+    <% end %>
+    <td><%= link_to 'détail', visite_machine %></td>
+    <td><%= link_to 'modifier', edit_visite_machine_path(visite_machine) %></td>
+    <td><%= link_to 'suppr', visite_machine, :confirm => 'êtes vous sur?', :method => :delete %></td>
+  </tr>
+<% end %>
+<br />
+</table>
+<p>
+</p>

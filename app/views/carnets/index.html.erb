@@ -1,0 +1,35 @@
+﻿<h1>Dernier relevé Machine </h1>
+<table border=1>
+  <tr>
+  <td>Type Machine</td>
+  <td>Machine</td>
+    <td>Date dernier relevé;</td>
+    <td>Heure de vol</td>
+    <td>Nombre de cycle</td>
+    <td>Heure moteur </td>
+    <td>&nbsp</td>
+    <td>&nbsp</td>
+    <td>&nbsp</td>
+  </tr>
+
+<% @carnet.each do |carnet| %>
+<% if (Date.today - carnet[1]["date_releve"]  <7) then @style='OK' elsif (Date.today - carnet[1]["date_releve"]  <15) then @style='half_ko' else @style='KO' end %>
+<tr >
+	<td><%= carnet[1]["type_machine"]%>
+    <td><%= carnet[0] %></td>
+    <td id="<%=@style %>" ><%= carnet[1]["date_releve"].strftime('%d/%m/%Y') %></td>
+    <td align="right"><%= carnet[1]["heure_de_vol"] %></td>
+    <td align="right"><%= carnet[1]["nombre_cycle"] %></td>
+    <td align="right"><%= carnet[1]["heure_moteur"] %></td>
+    <td><%= link_to 'Nouveau', :action => 'new', :id_machine => carnet[1]["machine"]  %></td>
+    <td><%= link_to 'détail', :action => 'show', :id => carnet[1]["machine"]  %></td>
+    <td><%= link_to 'Supp',"/carnets/"+carnet[1]["id_carnet"].to_s, :confirm => 'êtes vous sur?',:method=> :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nouveau relevé', new_carnet_path %>
+<%= link_to 'impression du relevé;', "./carnets.pdf" %>
+<br>

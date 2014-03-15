@@ -1,0 +1,41 @@
+﻿<h1>Liste des visites d'équipements</h1>
+<%= link_to "Nouvelle visite d'équipement", new_visite_equipement_path %>
+<%num_serie=""%>
+<% vis_pro="" %>
+<% @visite_equipements.each do |visite_equipement| %>
+	<%if (num_serie!=visite_equipement.equipement.num_serie) then %>
+		<% num_serie=visite_equipement.equipement.num_serie %>
+		<% if(vis_pro!="") then %> </table> <%end%>
+		<% vis_pro=""%>
+		<h3><%= visite_equipement.equipement.type_equipement.nom_constructeur%> <%= visite_equipement.equipement.type_equipement.type_equipement%> <%= visite_equipement.equipement.num_serie%></h3>
+	<%end %>
+	<% if (vis_pro!=visite_equipement.visite_protocolaire_equipement.Nom) then %>
+		<% if(vis_pro!="") then %> </table> <%end%>
+		<% vis_pro=visite_equipement.visite_protocolaire_equipement.Nom %>
+		<h4><%=vis_pro %></h4>
+		<table border=1 width="700">
+		  <tr>
+			<td>Date de visite</td>
+			<td>Nom de la visite</td>
+			<td>réalisé à</td>
+			<td>&nbsp</td>
+			<td>&nbsp</td>
+			<td>&nbsp</td>
+		  </tr>
+	<%end%>
+
+	  <tr>
+	   <tr>
+	    <td><%= visite_equipement.date_visite.strftime('%d/%m/%Y') %></td>
+	    <td><%= visite_equipement.nom %></td>
+	    <td><%= visite_equipement.val_potentiel%> <%= visite_equipement.visite_protocolaire_equipement.type_potentiel.unitee %></td>
+	    <td><%= link_to 'détail', visite_equipement %></td>
+	    <td><%= link_to 'modifier', edit_visite_equipement_path(visite_equipement) %></td>
+	    <td><%= link_to 'Suppr', visite_equipement,data:{confirm:'êtes vous sur?'}, :method => :delete %></td>
+	  </tr>
+	<% end %>
+</table>
+
+<br />
+
+<%= link_to "Nouvelle visite d'équipement", new_visite_equipement_path %>

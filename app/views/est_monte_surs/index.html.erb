@@ -1,0 +1,40 @@
+﻿<h1>liste des &eacute;quipements mont&eacute;s</h1>
+<%= link_to 'nouveau montage', new_est_monte_sur_path %>
+<% immat="" %>
+
+<% @montage_equipements.each do |montage_equipement| %>
+	
+	<% if (immat!= montage_equipement.machine.Immatriculation) then %>
+		<% if ( immat!="") then %>
+			</table>
+		<%end %>
+		<% immat=montage_equipement.machine.Immatriculation %>
+		<h3> Equipements mont&eacute;s sur <%= montage_equipement.machine.type_machine.type_machine %> <%= montage_equipement.machine.Immatriculation%> </h3>
+		<table border=1 width=80%>
+		 <tr>
+			<td width=15%>Constructeur</td>
+			<td width=17%>type &eacute;quipement</td>
+			<td width=23%>num s&eacute;rie</td>
+			<td width=12%>date montage</td>
+			<td width=12%>date retrait</td>
+			<td width=6%>&nbsp;</td>
+			<td width=6%>&nbsp;</td>
+			<td width=6%>&nbsp;</td>
+		  </tr>
+<% end %>
+  <tr>
+    <td><%= montage_equipement.equipement.type_equipement.nom_constructeur    %></td>
+    <td><%= montage_equipement.equipement.type_equipement.type_equipement    %></td>
+    <td><%= montage_equipement.equipement.num_serie    %></td>
+    <td><%= if (montage_equipement.date_montage.nil?) then " " else  montage_equipement.date_montage.strftime('%d/%m/%Y')  end   %></td>
+    <td><%= if (montage_equipement.date_retrait.nil?) then " " else montage_equipement.date_retrait.strftime('%d/%m/%Y') end   %></td>
+    <td><%= link_to 'détail', montage_equipement %></td>
+    <td><%= link_to 'Modifier', edit_est_monte_sur_path(montage_equipement) %></td>
+    <td><%= link_to 'suppr', montage_equipement, :confirm => 'etes vous sur ?', :method => :delete %></td>
+  </tr>
+
+
+<% end %>
+</table>
+<br />
+

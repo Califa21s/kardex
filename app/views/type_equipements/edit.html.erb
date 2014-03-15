@@ -1,0 +1,47 @@
+﻿<h1>modifier un type d'équipement</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Détail', @type_equipement %> |
+<%= link_to "Retour à la liste des type d'équipement", type_equipements_path %>
+
+<div style="border-style: none;width:40%;">
+<h2>documents</h2>
+<h3>Manuel de maintenance</h3>
+<table border=0>
+	<% @mm_docs.each do |mm_doc| %>
+	<tr>
+		<td><%= link_to(mm_doc.Nom,url_for(:controller=>'doc_divers', :action=>'envoi_doc',:fichier=>mm_doc.adresse,:id=>0))%></td>
+		<td><%=   link_to('supprimer '+mm_doc.Nom,url_for(:controller=>'doc_divers', :action=>'suppr_doc',:id_fichier=>mm_doc.id,:id=>0),:confirm => 'etes vous sur?')%></td>
+	</tr>
+	<% end %>
+</table>
+</div>
+<p></p>
+<div style="border-style: solid;width:40%;">
+<h3>Ajouter un document</h3>
+<%= form_for(@doc, :url => url_for(:action => 'save_doc', :controller => 'doc_divers'),:html => { :multipart => true }) do |f| %>
+  <% if @doc.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@doc.errors.count, "error") %> prohibited this doc from being saved:</h2>
+
+      <ul>
+      <% @type_equipement.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+  <label for="doc_Nom">Nom du document:</label>
+  <%= text_field "doc", "Nom", :size => 20 %></p>
+  <p><label for="doc_type_doc_id">type de document:</label>
+<td>
+<%=  select("doc", "type_doc_id", TypeDoc.all.collect {|p| [ p.abbrev,p.id ] })%><br/>
+  </p>
+  <p>
+  <%= hidden_field "doc","id_entite",:value=>@type_equipement.id %>
+  <label for="doc_doc">document:</label><%= file_field 'upload', 'datafile' %></p>
+  <%= f.submit 'Enregistrer' %>
+  <% end %>
+</div>

@@ -1,0 +1,38 @@
+﻿<h1>liste des CN equipements</h1>
+<%= link_to 'Nouvelle CN équipement', new_cn_equipement_path %>
+<%type_equip="" %>
+<% @cn_equipements.each do |cn_equipement| %>
+	<% if (type_equip !=cn_equipement.type_equipement.nom_constructeur+cn_equipement.type_equipement.type_equipement) then %>
+		<% if (type_equip!="")  then%></table><% end %>
+		<% type_equip=cn_equipement.type_equipement.nom_constructeur+cn_equipement.type_equipement.type_equipement%>
+		<h3> <%= cn_equipement.type_equipement.nom_constructeur%> <%=cn_equipement.type_equipement.type_equipement %> </h3>
+		<table border=1 width =80%>
+		  <tr>
+			<td width =30%>Nom</td>
+			<td width =20%>Reference</td>
+			<td width =10%>BS</td>
+			<td width =7%>Valide</td>
+			<td width =10%>potentiel</td>
+			<td width =7%>&nbsp</td>
+			<td width =7%>&nbsp</td>
+			<td width =7%>&nbsp</td>
+		  </tr>
+	<%end%>
+
+
+  <tr>
+	<% if (cn_equipement.est_annule) then @style='annule' else @style='' end%>
+	<td id='<%=@style%>'><%= cn_equipement.nom %></td>
+	<td id='<%=@style%>'><%= cn_equipement.reference %></td>
+	<td><%= cn_equipement.service_bulletin %></td>
+	 <td align="center"><%= if (!cn_equipement.est_annule) then image_tag "case_a_cocher.gif" else  image_tag "case_cocher_vide.jpg" end %></td>
+	<td><%= if (cn_equipement.type_potentiel.unitee_saisie!="sans") then cn_equipement.val_potentiel end %> <%= if (cn_equipement.type_potentiel.unitee_saisie!="sans") then cn_equipement.type_potentiel.unitee_saisie end %></td>
+    <td><%= link_to 'détail', cn_equipement %></td>
+    <td><%= link_to 'Modifier', edit_cn_equipement_path(cn_equipement) %></td>
+    <td><%= link_to 'Supp', cn_equipement, :confirm => 'etes vous sur?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= link_to 'Nouvelle CN équipement', new_cn_equipement_path %>

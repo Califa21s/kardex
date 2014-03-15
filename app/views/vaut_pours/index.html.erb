@@ -1,0 +1,31 @@
+﻿<h1>liste des équivalences de visites</h1>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th> type de machine</th>
+      <th>visite</th>
+      <th>visite induite</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vaut_pours.each do |vaut_pour| %>
+      <tr>
+        <td><%= vaut_pour.maitre.type_machine.type_machine%></td>
+	<td><%= vaut_pour.maitre.Nom%></td>
+	<td><%= vaut_pour.induite.Nom%></td>
+        <td><%= link_to 'Détails', vaut_pour %></td>
+        <td><%= link_to 'modifier', edit_vaut_pour_path(vaut_pour) %></td>
+        <td><%= link_to 'Supp', vaut_pour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'nouvelle équivalence de visites', new_vaut_pour_path %>

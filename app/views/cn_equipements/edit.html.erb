@@ -1,0 +1,55 @@
+﻿<h1>Modification  CN equipement</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Détail', @cn_equipement %> |
+<%= link_to 'Retour à la liste ', cn_equipements_path %>
+<div style="border-style: none;width:40%;">
+<h2>documents</h2>
+<h3>CN</h3>
+<table border=0>
+	<% @cn_docs.each do |cn_doc| %>
+	<tr>
+		<td><%= link_to(cn_doc.Nom,url_for(:controller=>'doc_divers', :action=>'envoi_doc',:fichier=>cn_doc.adresse,:id=>0))%></td>
+		<td><%=   link_to('supprimer '+cn_doc.Nom,url_for(:controller=>'doc_divers', :action=>'suppr_doc',:id_fichier=>cn_doc.id,:id=>0),:confirm => 'êtes vous sur?')%></td>
+	</tr>
+	<% end %>
+</table>
+<h3>BS</h3>
+<table border=0>
+	<% @bs_docs.each do |bs_doc| %>
+	<tr>
+		<td><%= link_to(bs_doc.Nom,url_for(:controller=>'doc_divers', :action=>'envoi_doc',:fichier=>bs_doc.adresse,:id=>0))%></td>
+		<td><%=   link_to('supprimer '+bs_doc.Nom,url_for(:controller=>'doc_divers', :action=>'suppr_doc',:id_fichier=>bs_doc.id,:id=>0),:confirm => 'êtes vous sur?')%></td>
+	</tr>
+	<% end %>
+</table>
+</div>
+<p></p>
+<div style="border-style: solid;width:40%;">
+<h3>Ajouter un document</h3>
+<%= form_for(@doc, :url => url_for(:action => 'save_doc', :controller => 'doc_divers'),:html => { :multipart => true }) do |f| %>
+    <% if @doc.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@type_machine.errors.count, "error") %> prohibited this type_machine from being saved:</h2>
+
+      <ul>
+      <% @type_machine.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+  <label for="doc_Nom">Nom du document:</label>
+  <%= text_field "doc", "Nom", :size => 20 %></p>
+  <p><label for="doc_type_doc_id">type de document:</label>
+<td>
+<%=  select("doc", "type_doc_id", TypeDoc.all.collect {|p| [ p.abbrev,p.id ] })%><br/>
+  </p>
+  <p>
+  <%= hidden_field "doc","id_entite",:value=>@cn_equipement.id %>
+  <label for="doc_doc">document:</label><%= file_field 'upload', 'datafile' %></p>
+  <%= f.submit 'Enregistrer' %>
+  <% end %>
+</div>

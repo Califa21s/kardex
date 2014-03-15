@@ -1,0 +1,58 @@
+﻿<p id="notice"><%= notice %></p>
+<h1>DETAIL VISITE ENTRETIEN</h1>
+<table border=0>
+<tr>
+	<td>
+	Nom de la visite
+	</td>
+	<td>
+	<%=@visite_protocolaire.Nom %>
+	</td>
+</tr>
+<tr>
+	<td>
+	Type de machine
+	</td>
+	<td>
+	<%=@visite_protocolaire.type_machine.type_machine %>
+	</td>
+</tr>
+<tr>
+	<td>
+	type de potentiel
+	</td>
+	<td>
+	<%=@visite_protocolaire.type_potentiel.type_potentiel %>
+	</td>
+</tr>
+<tr>
+	<td>
+	valeur du potentiel
+	</td>
+	<td>
+	<%=@visite_protocolaire.valeur_potentiel %>
+	</td>
+</tr>
+<tr>
+	<td>
+	tolérance
+	</td>
+	<td>
+	<%=@visite_protocolaire.tolerance %>
+	</td>
+</tr>
+<tr>
+	<td>
+	Potentiel variable
+	</td>
+	<td align="center"><%= if (@visite_protocolaire.potentiel_variable) then image_tag "case_a_cocher.gif" else image_tag "case_cocher_vide.jpg" end %></td>
+	</tr>
+<tr>
+	<td>
+	Commentaires
+	</td>
+	<td align="center"><%=@visite_protocolaire.commentaire %></td>
+	</tr>
+</table>
+<%= link_to 'Modifier', edit_visite_protocolaire_path(@visite_protocolaire) %> |
+<%= link_to 'retour à la liste des visites protocolaires', visite_protocolaires_path %>

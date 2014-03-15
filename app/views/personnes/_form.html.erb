@@ -1,0 +1,41 @@
+
+<%= form_for(@personne) do |f| %>
+<table border=0>
+  <% if @personne.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@personne.errors.count, "error") %> prohibited this personne from being saved:</h2>
+
+      <ul>
+      <% @personne.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<tr><td>
+<label for="personne_Nom">Nom:</label></td>
+<td><%= text_field "personne", "Nom", :size => 20 %><br/></td></tr>
+<tr><td>
+<label for="personne_prenom">Pr&eacute;nom:</label></td>
+<td><%= text_field "personne", "prenom", :size => 20 %><br/></td></tr>
+<tr>
+<td> <label for="personne_id_fonction">Fonction:</label></td>
+<td>
+<%=  select("personne", "id_fonction", Fonction.all.collect {|p| [ p.nom_fonction, p.id ] })%><br/>
+</td></tr>
+<tr><td>
+<label for="personne_login">Login:</label></td>
+<td><%= text_field "personne", "login", :size => 20 %><br/></td></tr>
+<tr><td>
+<tr><td>
+<label for="personne_pass">Mot de passe:</label></td>
+<td><%= text_field "personne", "pass", :size => 20 %><br/></td></tr>
+<tr><td>
+<tr><td>
+ <div class="actions">
+    <%=  f.submit(:value=>'sauver') %>
+  </div>
+  </td></tr>
+  </table>
+<% end %>

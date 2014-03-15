@@ -1,0 +1,32 @@
+﻿<h1>Liste des machines gérées</h1>
+<table border=1 >
+  <tr>
+    <td> type </td>
+    <td> Nom Constructeur</td>
+    <td>  Immatriculation </td>
+    <td>  num série </td>
+    <td>  date construction </td>
+    <td>&nbsp</td>
+    <% if (@modif)  %><td>&nbsp</td><%end%>
+     <%if (@suppr)  %><td>&nbsp</td><%end%>
+  </tr>
+
+<% @machines.each do |mach| %>
+	<% couleur= Machine.couleur(mach.id) %>
+	<% if(couleur==2) then @style='KO' elsif (couleur==1) then @style='half_ko' else  @style='OK' end %>
+  <tr>
+	<td><%= mach.type_machine.type_machine%>
+	<td><%= mach.type_machine.Nom_constructeur%>
+	<td id='<%= @style %>' ><%=  mach.Immatriculation %></td>
+	<td><%=  mach.num_serie %></td>
+	<td><%=  mach.date_construct.strftime('%d/%m/%Y') %></td>
+	<td><%= link_to 'détail', mach %></td>
+	 <% if (@modif)  %><td><%= link_to 'modifier', edit_machine_path(mach) %></td><%end%>
+	 <% if (@suppr)  %><td><%= link_to 'supprimer', mach, :confirm => 'êtes vous sur?', :method => :delete %></td><%end%>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'créer une nouvelle machine', new_machine_path %>

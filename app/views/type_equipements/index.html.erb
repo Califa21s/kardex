@@ -1,0 +1,28 @@
+﻿<h1>Liste des types d'équipements</h1>
+
+<%= link_to "Nouveau  type d'équipement", new_type_equipement_path %><br />
+<table border=1>
+  <tr>
+	<td>Constructeur</td>
+	<td>Type d'équipement</td>
+	<td>Moteur</td>
+	<td>Hélice</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+  </tr>
+
+<% @type_equipements.each do |type_equipement| %>
+  <tr>
+    <td><%= type_equipement.nom_constructeur %></td>
+    <td><%= type_equipement.type_equipement %></td>
+    <td align="center"><%= if (type_equipement.moteur) then image_tag "case_a_cocher.gif" else  image_tag "case_cocher_vide.jpg" end %></td>
+    <td align="center"><%= if ( type_equipement.helice) then image_tag "case_a_cocher.gif" else image_tag "case_cocher_vide.jpg" end %></td>
+    <td><%= link_to 'Détail', type_equipement %></td>
+    <td><%= link_to 'modifer', edit_type_equipement_path(type_equipement) %></td>
+    <td><%= link_to 'Suppr', type_equipement, :confirm => 'etes vous sur?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

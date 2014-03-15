@@ -1,0 +1,36 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require scaffolds
+ */
+#KO {
+	background-color:#FF0000;
+	color:#FFFFFF
+}
+#half_ko {
+	background-color:#FFA500;
+	color:#FFFFFF
+}
+#OK {
+	background-color:#00FF00;
+	color:#FFFFFF;
+}
+#LIMITE{
+	background-color:#FF9900;
+	color:#000000;
+	}
+#annule{
+	text-decoration:line-through;
+	font-style:italic;
+}
+#NA {
+	text-decoration:line-through;
+	}

@@ -1,0 +1,29 @@
+﻿<h1>Détail de la visite <%=@visite_protocolaire_equipement.Nom %></h1>
+<table border=1>
+  <tr>
+  <td>Nom</td>
+    <td>type d'équipement</td>
+    <td>type de potentiel</td>
+    <td>valeur de potentiel </td>
+    <td>tolerance </td>
+    <td>
+	Commentaires
+	</td>
+  </tr>
+
+  <tr>
+    <td><%=@visite_protocolaire_equipement.Nom %></td>
+    <td><%=@visite_protocolaire_equipement.type_equipement.nom_constructeur + " " + @visite_protocolaire_equipement.type_equipement.type_equipement %></td>
+    <td><%=@visite_protocolaire_equipement.type_potentiel.type_potentiel %></td>
+    <td><%=@visite_protocolaire_equipement.valeur_potentiel %></td>
+    <td><%=@visite_protocolaire_equipement.tolerance %></td>
+	
+	<td align="center"><%=@visite_protocolaire_equipement.commentaire %></td>
+  </tr>
+
+</table>
+
+
+
+<%= link_to 'Modifier', edit_visite_protocolaire_equipement_path(@visite_protocolaire_equipement) %> |
+<%= link_to 'retour à la liste', visite_protocolaire_equipements_path %>

@@ -1,0 +1,27 @@
+﻿<%= form_for(@type_machine) do |f| %>
+  <% if @type_machine.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@type_machine.errors.count, "error") %> prohibited this type_machine from being saved:</h2>
+
+      <ul>
+      <% @type_machine.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<table>
+  <tr><td>
+<label for="type_machine_nom_constructeur">Nom du constructeur:</label></td>
+<td><%= text_field "type_machine", "Nom_constructeur", :size => 20 %><br/></td></tr>
+<tr><td>
+<label for="type_machine_type_machine">type de machine:</label></td>
+<td><%= text_field "type_machine", "type_machine", :size => 20 %><br/></td></tr>
+<tr><td>
+    <%= f.submit 'enregistrer' %>
+  </p>
+  </td></tr>
+  </table>
+<% end %>
+
+

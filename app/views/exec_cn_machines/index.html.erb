@@ -1,0 +1,39 @@
+﻿<h1>Applications des CN </h1>
+<% typ="" %>
+<% mach=""%>
+<br><%= link_to "saisie d'une application de CN", new_exec_cn_machine_path %></br>
+<% @exec_cn_machines.each do |exec_cn_machine| %>
+	<% if (typ!=exec_cn_machine.machine.Immatriculation+exec_cn_machine.cn_machine.nom) then %>
+	<% if typ!="" then %> </table>  <%end %>
+	<%typ=exec_cn_machine.machine.Immatriculation+exec_cn_machine.cn_machine.nom%>
+	<% if (mach!= exec_cn_machine.machine.Immatriculation) then %>
+		<% mach=exec_cn_machine.machine.Immatriculation %>
+		<h3><%= exec_cn_machine.machine.type_machine.type_machine%> <%= exec_cn_machine.machine.Immatriculation%> </h3>
+	<% end %>
+	<h4><%= exec_cn_machine.cn_machine.nom %></h4>
+	<table border=1 width= 60% >
+	  <tr>
+		<td width= 15%>Numéro BS</td>
+		<td width= 10%>date execution</td>
+		<td width= 10%>Potentiel à execution</td>
+		<td width= 10%>CN applicable</td>
+		<td width= 5%>&nbsp;</td>
+		<td width= 5%>&nbsp;</td>
+		<td width= 5%>&nbsp;</td>
+	  </tr>
+	<%end%>
+  <tr>
+    <td><%= exec_cn_machine.cn_machine.service_bulletin %></td>
+    <td><%= exec_cn_machine.date_exec.strftime('%d/%m/%Y') %></td>
+    <td>
+    <% if ( exec_cn_machine.non_applicable or exec_cn_machine.cn_machine.type_potentiel.type_potentiel=="Une fois" or exec_cn_machine.cn_machine.type_potentiel.type_potentiel=="Calendaire") then " " else 
+		exec_cn_machine.val_potentiel_exec.to_s + exec_cn_machine.cn_machine.type_potentiel.unitee 
+		end%>
+    </td>
+    <td align="center"><%= if (!exec_cn_machine.non_applicable) then image_tag "case_a_cocher.gif" else image_tag "case_cocher_vide.jpg" end %></td>
+    <td><%= link_to 'détails', exec_cn_machine %></td>
+    <td><%= link_to 'modifier', edit_exec_cn_machine_path(exec_cn_machine) %></td>
+    <td><%= link_to 'Suppr', exec_cn_machine, data: { confirm: 'êtes vous sur?'}, :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,0 +1,24 @@
+<h1> relev&eacute;s carnet <%=@machine.Immatriculation %></h1>
+ <table border=1>
+ <tr>
+    <td>date dernier relev&eacute;</td>
+    <td>heure de vol</td>
+    <td>nombre de cycle</td>
+    <td>heure moteur </td>
+    <td>&nbsp</td>
+    <td>&nbsp</td>
+  </tr>
+  <% @carnets.each do |carnet| %>
+ <tr>
+    
+    <td><%= carnet["date_releve"].strftime('%d/%m/%Y') %></td>
+    <td><%= carnet["heure_de_vol"] %></td>
+    <td><%= carnet["nombre_cycle"] %></td>
+    <td><%= carnet["heure_moteur"] %></td>
+    <td><%= link_to 'Modifier', edit_carnet_path(carnet) %></td>
+    <td><%= link_to 'Supp',carnet, :confirm => 'etes vous sur?',:method=> :delete %></td>
+    <td><%= link_to("carnet",url_for("/carnets.pdf?date="+carnet["date_releve"].to_s)) %>
+  </tr>
+  <% end %>
+  </table>
+<%= link_to 'retour', carnets_path %>

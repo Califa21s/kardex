@@ -1,0 +1,35 @@
+﻿<h1>liste des modifications réparation</h1>
+<% immat="" %>
+<br><%= link_to 'nouvelle modification réparation', new_modif_repar_path %></br>
+<% @modif_repars.each do |modif_repar| %>
+	<% if (immat!=modif_repar.machine.Immatriculation) then %>
+		<% if (immat!="") then %> </table> <%end %>
+		<%immat=modif_repar.machine.Immatriculation %>
+		<h3><%=modif_repar.machine.type_machine.Nom_constructeur %> <%= modif_repar.machine.type_machine.type_machine%>  <%= modif_repar.machine.Immatriculation%></h3>
+		<table border=1 width=80%>
+		  <tr>
+		     <td width=10%>Service Bull</td>
+		     <td width=40%>Objet</td>
+		     <td width=10%>r&eacute;f&eacute;rence</td>
+		     <td width=15%>date r&eacute;alisation</td>
+		     <td width=15%>Fait par</td>
+		     <td>&nbsp;</td>
+		     <td>&nbsp;</td>
+		     <td>&nbsp;</td>
+		  </tr>
+	<%end%>
+	 <tr>
+	    <td><%= modif_repar.sb %></td>
+	    <td><%= modif_repar.Objet%></td>
+	    <td><%= modif_repar.ref %></td>
+	    <td><%= modif_repar.date_rel%></td>
+	    <td><%= modif_repar.fait_par%></td>
+	    <td><%= link_to 'Détail', modif_repar %></td>
+	    <td><%= link_to 'Modifier', edit_modif_repar_path(modif_repar) %></td>
+	    <td><%= link_to 'suppr', modif_repar, :confirm => 'etes vous sur', :method => :delete %></td>
+	  </tr>
+<% end %>
+</table>
+
+<br />
+

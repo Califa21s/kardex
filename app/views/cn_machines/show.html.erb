@@ -1,0 +1,49 @@
+﻿<h1>Détail Cn Machine</h1>
+<p><%= link_to 'nouvelle CN machine', new_cn_machine_path %></p>
+<table border=1>
+  <tr>
+	<td>Type Machine</td>
+	<td>Nom</td>
+	<td>Réference</td>
+	<td>BS</td>
+	<td>Valide</td>
+	<td>potentiel</td>
+	<td>Commentaires</td>
+	<td>&nbsp</td>
+	<td>&nbsp</td>
+  </tr>
+
+  <tr>
+	<td><%= @cn_machine.type_machine.Nom_constructeur + @cn_machine.type_machine.type_machine %></td>
+	<td><%= @cn_machine.nom %></td>
+	<td><%= @cn_machine.reference %></td>
+	<td><%= @cn_machine.service_bulletin %></td>
+	<td align="center"><%= if (!@cn_machine.est_annule) then image_tag "case_a_cocher.gif" else image_tag "case_cocher_vide.jpg" end %></td>
+	<td><%= @cn_machine.val_potentiel  %> <%= @cn_machine.type_potentiel.unitee_saisie %></td>
+	<td align="center"><%=@cn_machine.commentaire %></td>
+    <td><%= link_to 'Modifier', edit_cn_machine_path(@cn_machine) %></td>
+    <td><%= link_to 'Supp', @cn_machine,  data:{ confirm: 'êtes vous sur?'}, :method => :delete %></td>
+  </tr>
+</table>
+<p></p>
+<div style="border-style: none;width:40%;">
+<h2>documents</h2>
+<h3>CN</h3>
+<table border=0>
+	<% @cn_docs.each do |cn_doc| %>
+	<tr>
+		<td><%= link_to(cn_doc.Nom,url_for(:controller=>'doc_divers', :action=>'envoi_doc',:fichier=>cn_doc.adresse,:id=>0))%></td>
+	</tr>
+	<% end %>
+</table>
+
+<h3>BS</h3>
+<table border=0>
+	<% @bs_docs.each do |bs_doc| %>
+	<tr>
+		<td><%= link_to(bs_doc.Nom,url_for(:controller=>'doc_divers', :action=>'envoi_doc',:fichier=>bs_doc.adresse,:id=>0))%></td>
+	</tr>
+	<% end %>
+</table>
+</div>
+<%= if !(params[:id_machine].nil?) then link_to 'retour detail machine',url_for(:controller => 'machines',:action=>"show", :id => params[:id_machine],:onglet =>2)  else  link_to 'retour à la liste', cn_machines_path end%>

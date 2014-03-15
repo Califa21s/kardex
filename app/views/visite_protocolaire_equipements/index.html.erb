@@ -1,0 +1,33 @@
+﻿<h1>Liste des types de visites d'équipements</h1>
+<%= link_to "nouveau type de visite d'équipement", new_visite_protocolaire_equipement_path %>
+<%type=""%>
+<% @visite_protocolaire_equipements.each do |visite_protocolaire| %>
+	<% if (type!=visite_protocolaire.type_equipement.type_equipement) then %>
+		<% if (type!="") then %></table><% end %>
+		<% type=visite_protocolaire.type_equipement.type_equipement %>
+		<h3><%=visite_protocolaire.type_equipement.nom_constructeur + " " + visite_protocolaire.type_equipement.type_equipement %></h3>
+		<table border=1>
+		<tr>
+		    <td>Nom</td>
+		    <td>type de potentiel</td>
+		    <td>valeur de potentiel </td>
+		    <td>tolerance </td>
+		    <td>&nbsp</td>
+		    <td>&nbsp</td>
+		    <td>&nbsp</td>
+		</tr>
+	<%end%>
+	  <tr>
+	    <td><%=visite_protocolaire.Nom %></td>
+	    <td><%=visite_protocolaire.type_potentiel.type_potentiel %></td>
+	    <td><%=visite_protocolaire.valeur_potentiel%> <%=visite_protocolaire.type_potentiel.unitee %></td>
+	    <td><%=visite_protocolaire.tolerance %> <%=visite_protocolaire.type_potentiel.unitee %></td>
+	    <td><%= link_to 'détail', visite_protocolaire %></td>
+	    <td><%= link_to 'modifier',  edit_visite_protocolaire_equipement_path(visite_protocolaire) %></td>
+	    <td><%= link_to 'supp', visite_protocolaire, :confirm => 'êtes vous sur', :method => :delete %></td>
+	  </tr>
+<% end %>
+
+</table>
+
+<br />
