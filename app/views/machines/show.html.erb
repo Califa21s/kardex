@@ -161,7 +161,7 @@
 	</div>
 	<div	id=f5 style="position:absolute; background-color:#FFFFFF ; border:solid; width:1100px; height:4000px; left:10px; top:115px; clip:rect('0', '0', '900', '900') ; z-index:0 ;visibility:<%=@onglet[4]%>" >
 	<h2> Machine </h2>
-	<table border=1>
+	<table border=1 width=40%>
 <tr>
 	<td>nom</td>
 	<td>type de dur&eacute;e de vie</td>
@@ -209,7 +209,7 @@
     <td><%= modif_repar.date_rel.strftime('%d/%m/%Y')%></td>
     <td><%= modif_repar.fait_par%></td>
     <% if (lance_visite) then %> 
-    <td><%= link_to 'D&eacute;tail', modif_repar %></td>
+    <td><%= link_to 'Détail', modif_repar %></td>
     <td><%= link_to 'Modifier', edit_modif_repar_path(modif_repar) %></td>
     <td><%= link_to 'suppr', modif_repar, :confirm => 'etes vous sur', :method => :delete %></td><% end %>
   </tr>

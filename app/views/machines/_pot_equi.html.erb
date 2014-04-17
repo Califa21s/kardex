@@ -8,16 +8,16 @@
 		<%if (type_equip==2) then %><h3>H&eacute;lice</h3><%end %>
 		<% if (type_equip==1) then %><h3>Moteur</h3><%end %>
 		<% if (type_equip==3) then %><h3>Divers</h3> <%end %>
-		<table border=1>
+		<table border=1 width=80%>
 		<tr>
-			<td>&eacute;quipement</td>
-			<td>Num&eacute;ro de s&eacute;rie </td>
-			<td>type de dur&eacute;e de vie</td>
-			<td>dur&eacute;e de vie</td>
-			<td>dur&eacute;e de vie restante</td>
+			<td width=15%>&eacute;quipement</td>
+			<td  width=15%>Num&eacute;ro de s&eacute;rie </td>
+			<td  width=15%>type de dur&eacute;e de vie</td>
+			<td  width=15%>dur&eacute;e de vie</td>
+			<td  width=15%>dur&eacute;e de vie restante</td>
 			<td>But&eacute;e</td>
 			    
-		    <% if (lance_visite) then %><td>modifier dur&eacute;e de vie</td><% end %>
+		    <% if (lance_visite) then %><td  width=10%>modifier dur&eacute;e de vie</td><% end %>
 		</tr>
 	<%end %>
 	<% @style=styling(pot[1]["couleur"])%>

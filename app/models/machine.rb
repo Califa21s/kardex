@@ -1,11 +1,11 @@
 ﻿class Machine < ActiveRecord::Base
 belongs_to:type_machine, :foreign_key =>:type_machine_idtype_machine
-has_many :montage_equipement, :foreign_key =>:idmachine
+validates_presence_of :type_machine_idtype_machine ,:message => "le type de machine ne peut etre vide"
 validates_presence_of :Immatriculation ,:message => "l'immatriculation ne peut etre vide"
 validates_presence_of :num_serie, :message => "le numéro de série ne peut etre vide"
 validates_presence_of :date_construct, :message => "la date de construction ne peut être vide"
 has_many :modif_repar, :foreign_key =>:id_machine
-
+has_many :montage_equipement, :foreign_key =>:idmachine
 
 
 def self.couleur(id)

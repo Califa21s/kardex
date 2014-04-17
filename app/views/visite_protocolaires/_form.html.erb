@@ -1,4 +1,4 @@
-﻿<table border=0>
+﻿
 <%= form_for(@visite_protocolaire) do |f| %>
   <% if @visite_protocolaire.errors.any? %>
     <div id="error_explanation">
@@ -11,7 +11,7 @@
       </ul>
     </div>
   <% end %>
-
+<table border=0>
   <tr><td>
 <label for="visite_protocolaire_nom">nom de la visite :</label></td>
 <td><%= text_field "visite_protocolaire", "Nom", :size => 20 %><br/>
@@ -51,6 +51,7 @@
   <p>
     <%= f.submit 'Créer' %>
   </p>
-<% end %>
-</td></tr>
+  </td></tr>
 </table>
+<% end %>
+

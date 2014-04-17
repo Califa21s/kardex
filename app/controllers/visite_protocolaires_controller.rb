@@ -71,6 +71,6 @@ class VisiteProtocolairesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def visite_protocolaire_params
-      params[:visite_protocolaire]
+      params[:visite_protocolaire].permit(:idtype_potentiel,:valeur_potentiel,:idtype_machine,:Nom,:tolerance,:potentiel_variable,:commentaire)
     end
 end

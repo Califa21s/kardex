@@ -2,6 +2,8 @@
 	
 	belongs_to:type_potentiel, :foreign_key =>:idtype_potentiel
 	belongs_to:type_machine, :foreign_key =>:idtype_machine
+	validates_presence_of :idtype_machine,:message => "le type machine ne peut être vide"
+	validates_presence_of :idtype_potentiel,:message => "le type potentiel ne peut être vide"
 	def self.potentiel_machine(id_machine,*date)
 	#calcul les potentiels restant pour une machine
 	machine=Machine.find(id_machine)

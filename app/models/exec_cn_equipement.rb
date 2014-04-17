@@ -4,6 +4,9 @@
 	belongs_to:cn_equipement, :foreign_key =>:idcn_equipement
 	validates_presence_of :val_potentiel_exec ,:message => "le relevé de potentiel doit figurer"
 	validates_presence_of :date_exec ,:message => "la date de la visite doit figurer"
+	validates_presence_of :id_equipement ,:message => "l'équipement doit être défini"
+	validates_presence_of :idcn_equipement,:message => "la CN doit être définie"
+	
 	
 def self.etat_cn(id_mach,*date)
 	# on selectionne les équipements montés sur une machine donnée

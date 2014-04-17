@@ -17,6 +17,7 @@
 
   # GET /visite_machines/new
   def new
+    @tableau_mois=["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre"]
     @visite_machine = VisiteMachine.new
     #on prend en compte si on vient avec des paramètres prééablie
     @visit_prot=Machine.tab_visite(nil)
@@ -82,7 +83,28 @@
 		 }
         format.json { render action: 'show', status: :created, location: @visite_machine }
       else
-        format.html { render action: 'new' }
+        format.html {
+			@tableau_mois=["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre"]
+		    @visit_prot=Machine.tab_visite(nil)
+		    if !(@visite_machine.idmachine.nil?) then 
+				@visit_prot=Machine.tab_visite(@visite_machine.idmachine)
+				# si la machine est connu au restreint au visite définie pour la machine
+			end
+		    @unite="&nbsp;"
+		    if !(@visite_machine.id_visite_protocolaire.nil?) then 
+				
+				#recup type de protentiel lié  à la visite 
+				@visite_prot=@visite_machine.visite_protocolaire
+				@unite=@visite_prot.type_potentiel.unitee_saisie
+				if @visite_prot.nil? then
+					@pot_var=false
+				else
+					@pot_var=@visite_prot.potentiel_variable
+				end
+				@visite_induites=@visite_prot.maitre
+		    end
+		render action: 'new'
+		}
         format.json { render json: @visite_machine.errors, status: :unprocessable_entity }
       end
     end

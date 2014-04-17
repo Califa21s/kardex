@@ -2,8 +2,17 @@
 belongs_to:machine, :foreign_key =>:idmachine
 belongs_to:type_potentiel, :foreign_key =>:idtype_potentiel
 belongs_to:visite_protocolaire, :foreign_key =>:id_visite_protocolaire
-validates_presence_of :val_potentiel ,:message => "le relev&eacute de potentiel doit figurer"
+#validates_presence_of :val_potentiel ,:message => "le relevé de potentiel doit figurer"
 validates_presence_of :date_visite ,:message => "la date de la visite doit figurer"
+validates_presence_of :idmachine ,:message => "la machine doit être définie"
+validates_presence_of :id_visite_protocolaire ,:message => "la date de la visite doit figurer"
+validate :pot_var
+ 
+  def pot_var
+    if (self.visite_protocolaire.potentiel_variable and self.val_nouv_pot.nil?) then
+      errors.add(:val_nouv_pot, "le potentiel de la visite doit être rempli")
+    end
+  end
 ####################################################################################
 #cacul pour une machine et une date l'�tat de toutes les vistes protocolaires
 def self.dernieres_visites(id_mach,*date)

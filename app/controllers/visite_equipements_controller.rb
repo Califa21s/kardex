@@ -60,7 +60,7 @@
   # POST /visite_equipements.json
   def create
     @visite_equipement = VisiteEquipement.new(visite_equipement_params.permit(:idequipement,:date_visite,:idtype_potentiel,:val_potentiel,:id_visite_protocolaire_equipement,:nom,:commentaire))
-
+	@tableau_mois=["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre"]
     respond_to do |format|
       if @visite_equipement.save
 	#on passe aux visites induites

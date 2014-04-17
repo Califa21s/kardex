@@ -1,9 +1,9 @@
-class Carnet < ActiveRecord::Base
+﻿class Carnet < ActiveRecord::Base
 belongs_to:machine, :foreign_key =>:machine_idmachine
 validates_presence_of :nombre_cycle ,:message => "le nombre de cycle doit figurer"
 validates_presence_of :heure_de_vol, :message => "le nombre d'heure de vol doit etre d&eacutefini"
 validates_presence_of :date_releve ,:message => "la date du relev&eacute; doit figurer"
-
+validates_presence_of :machine_idmachine ,:message => "la machine doit être indiquée"
 def self.liste_machines_carnet(*date)
 	# on selectionne toutes les machines
 	list=Hash.new

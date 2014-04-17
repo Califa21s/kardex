@@ -4,6 +4,9 @@ belongs_to:type_potentiel, :foreign_key =>:idtype_potentiel
 belongs_to:visite_protocolaire_equipement, :foreign_key =>:id_visite_protocolaire_equipement
 validates_presence_of :val_potentiel ,:message => "le relevÃ© de potentiel doit figurer"
 validates_presence_of :date_visite ,:message => "la date de la visite doit figurer"
+validates_presence_of :idequipement ,:message => "l'Ã©quipement doit figurer"
+validates_presence_of :id_visite_protocolaire_equipement ,:message => "le type de la visite doit figurer"
+
 def self.dernieres_visites(id_mach,*date)
 	#rÃ©cupÃ¨re poour les équipement d'une machine les états de visites 
 	#en entrée la machine et la date ( facultatif si omis date= date du jour

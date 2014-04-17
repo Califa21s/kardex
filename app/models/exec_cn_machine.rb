@@ -4,6 +4,8 @@
 	belongs_to:cn_machine, :foreign_key =>:idcn_machine
 	validates_presence_of :val_potentiel_exec ,:message => 'le relevé de potentiel doit figurer'
 	validates_presence_of :date_exec ,:message => 'la date de la visite doit figurer'
+	validates_presence_of :id_machine ,:message => 'la machine doit figurer'
+	validates_presence_of :idcn_machine ,:message => 'la CN doit figurer'
 
 def self.etat_cn(id_mach,*date)
 	liste2=Hash.new
