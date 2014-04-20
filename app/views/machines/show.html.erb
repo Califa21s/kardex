@@ -1,4 +1,5 @@
-﻿<h1>Détail machine <%=@machine.Immatriculation%> </h1><%= link_to('imprimer la fiche', "./" + @machine.id.to_s + ".pdf") %>
+﻿<h1>Détail machine <%=@machine.Immatriculation%> </h1>
+<%= link_to('imprimer la fiche', "./" + @machine.id.to_s + ".pdf") %>
 
 	<div id="fx1"  style="position:absolute;background-color:#FFFFFF ; border: solid; width:100px; height:40px; left:  50px; top:75px; z-index:5 ; border-bottom : <%=@onglet1[0]%> " onclick="active_onglet(1)"><b>donn&eacute;es g&eacute;n&eacute;rales </b></div>
 	<div id="fx2"  style="position:absolute;background-color:#FFFFFF ; border: solid; width:100px; height:40px; left:153px; top:75px; z-index:5; border-bottom : <%=@onglet1[1]%>" onclick="active_onglet(2)"> <b id='<%=styling(@couleur_visite)%>'>	Visites Entretien</b> </div>
